@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student content creation at IIT Delhi</title>
+<meta name="description" content="A qualitative case study of how IIT Delhi student content creators develop and present their online content. SPL 7750, School of Public Policy, IIT Delhi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: a research report told as a sequence of scenes; plain headings, exact claims
+IDEA: one scroll-driven story; a sticky scene beside the text changes as each part of the argument is read
+PICTURE: drawn SVG scenes (campus, the gate, audience rings, the cycle, the cutting floor, the model)
+COLOUR and TYPE: sandstone and brick from the campus, sky blue, marigold accent; Source Serif 4 + IBM Plex Sans
+LAYOUT: scene left, text cards right; on phones the scene sits on top and cards scroll over it
+*/
+:root{--sand:#F3ECE0;--brick:#A9472F;--ink:#1E1D24;--ink2:#4C4A52;--mute:#8C877E;--gold:#E3A23B;--blue:#2D5D86;--card:#FFFDF9;--line:#DCD2C1;
+--serif:"Source Serif 4",Georgia,serif;--sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font:16.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;margin:0;text-wrap:balance}
+h2{font-size:clamp(28px,3.4vw,40px)}
+h3{font-size:20px}
+p{margin:0 0 .8em}
+button{font:inherit;color:inherit}
+.lab{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.q{font-family:var(--serif);font-size:18px;line-height:1.45;border-left:3px solid var(--brick);padding-left:12px;margin:10px 0 4px}
+.src{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.pill{display:inline-block;font-size:12.5px;padding:3px 9px;border-radius:999px;margin:2px 4px 2px 0;border:1px solid}
+.pill.p{color:#1F6A43;border-color:#B5D6C1;background:#EFF7F2}.pill.f{color:var(--brick);border-color:#E7BFB3;background:#FBEFEA}.pill.w{color:#8A5A00;border-color:#E8D3A2;background:#FBF5E6}
+nav{position:fixed;top:0;left:0;right:0;z-index:30;background:rgba(243,236,224,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;height:48px;align-items:center}
+nav a{flex:none;text-decoration:none;color:var(--ink2);font-size:13.5px;padding:5px 10px;border-radius:6px}
+nav a.cur{background:var(--ink);color:#fff}
+#prog{position:absolute;left:0;bottom:-1px;height:2px;background:var(--brick);width:0}
+.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero svg.scene{position:absolute;inset:0;width:100%;height:100%}
+.hero .txt{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%;padding:0 24px 9vh}
+.hero .box{background:rgba(255,253,249,.93);border:1px solid var(--line);border-radius:14px;padding:28px 30px;max-width:620px;box-shadow:0 20px 50px -25px rgba(30,20,10,.35)}
+.hero h1{font-size:clamp(30px,4.4vw,52px);font-weight:700}
+.hero .by{margin:12px 0 16px;color:var(--ink2);font-size:15px}
+.hero .abs{font-size:16px;color:var(--ink2);margin:0}
+.cue{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--mute)}
+.chap{position:relative;padding-top:48px}
+.chap-head{max-width:1200px;margin:0 auto;padding:60px 24px 10px}
+.chap-head .lab{display:block;margin-bottom:8px}
+.chap-head p{max-width:640px;color:var(--ink2);margin-top:10px}
+.story{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px}
+.stage{position:sticky;top:64px;height:calc(100vh - 88px);display:flex;align-items:center;justify-content:center}
+.stage .frame{position:relative;width:100%;height:100%;max-height:640px;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:0 20px 50px -30px rgba(30,20,10,.4)}
+.stage svg{position:absolute;inset:0;width:100%;height:100%}
+.steps{padding:28vh 0 36vh}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:55vh;opacity:.35;transition:opacity .4s;box-shadow:0 10px 30px -22px rgba(30,20,10,.35)}
+.step.on{opacity:1}
+.step:last-child{margin-bottom:0}
+.step h3{margin-bottom:8px}
+.step p:last-child{margin-bottom:0}
+@media(max-width:900px){.story{grid-template-columns:1fr;gap:0}.stage{top:52px;height:52vh;z-index:1}.steps{position:relative;z-index:2;padding:4vh 0 26vh}.step{margin-bottom:44vh;opacity:.97}}
+.fade{transition:opacity .6s}
+.hide{opacity:0}
+.layer{position:absolute;inset:0;padding:30px;transition:opacity .5s}
+.paper{position:absolute;inset:24px;background:#FFFEFB;border:1px solid var(--line);border-radius:6px;padding:28px 30px;box-shadow:0 8px 20px -14px rgba(0,0,0,.3);overflow:hidden;background-image:repeating-linear-gradient(transparent 0 31px,#EEE6D8 31px 32px)}
+.ver{font-family:var(--serif);font-size:clamp(15px,1.6vw,19px);line-height:1.4;margin:0 0 16px;transition:.5s;color:var(--ink)}
+.ver.old{color:#A39D93;text-decoration:line-through;text-decoration-color:var(--brick);text-decoration-thickness:2px}
+.ver.off{opacity:0;transform:translateY(8px)}
+.ver.final{font-weight:600}
+.sq{font-size:14px;color:var(--ink2);margin:0 0 6px 16px;font-family:var(--sans)}
+.vlab{font-family:var(--mono);font-size:11px;color:var(--mute);display:block}
+.tx{font-family:var(--serif);font-size:clamp(15px,1.5vw,18px);line-height:2}
+.tx .hl{background-size:0 100%;background-repeat:no-repeat;background-image:linear-gradient(rgba(227,162,59,.55),rgba(227,162,59,.55));transition:background-size 1s}
+.tx.go .hl{background-size:100% 100%}
+.note{background:#FFF6DF;border:1px solid #EBCF92;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:8px}
+.bins{position:absolute;left:24px;right:24px;bottom:22px;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;transition:opacity .5s}
+.bin{border-radius:6px;padding:6px;font-size:10.5px;line-height:1.2;min-height:46px;border:1px solid rgba(0,0,0,.08);transition:.4s}
+.bin.hit{outline:3px solid var(--ink);transform:translateY(-6px)}
+.mtx{width:100%;border-collapse:collapse;font-size:12px}
+.mtx th{font-weight:500;text-align:left;padding:3px 6px;color:var(--ink2)}
+.mtx th.c{text-align:center;font-family:var(--mono);font-size:10.5px}
+.mtx td{padding:2px}
+.mtx button{width:100%;height:26px;border:0;border-radius:3px;font-family:var(--mono);font-size:10.5px;cursor:pointer}
+#mxn{font-size:13px;color:var(--ink2);margin-top:8px;min-height:40px}
+.block{max-width:1200px;margin:0 auto;padding:40px 24px 20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:1px solid var(--line);background:var(--card);font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer;min-height:36px}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fbrow{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr);border-top:1px solid var(--line);font-size:15px}
+.fbrow>div{padding:12px 14px 12px 0}
+.fbrow .back{color:var(--ink2);transition:filter .4s}
+.fbrow.hidden .back{filter:blur(6px)}
+@media(max-width:700px){.fbrow{grid-template-columns:1fr}.fbrow>div{padding:4px 0}}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+.ct{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column}
+.ct .a{padding:14px 16px;font-size:14.5px}
+.ct .b{padding:14px 16px;font-size:14.5px;background:#F7EFE3;border-top:1px dashed var(--line);flex:1}
+.ct .m{padding:0 16px;max-height:0;overflow:hidden;transition:.4s;font-size:14px;color:#fff;background:var(--ink)}
+.ct.open .m{max-height:200px;padding:12px 16px}
+.ct .k{font-family:var(--mono);font-size:11px;color:var(--mute);display:block;margin-bottom:4px}
+.answer{background:var(--ink);color:#F7F1E6;border-radius:16px;padding:32px 34px;font-family:var(--serif);font-size:clamp(18px,2vw,22px);line-height:1.5}
+.answer .lab{color:#B8B1A5;display:block;margin-bottom:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:900px){.g3{grid-template-columns:1fr}}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-size:15px;color:var(--ink2)}
+.tile b{display:block;color:var(--ink);margin-bottom:6px;font-size:16px}
+details{border-top:1px solid var(--line);padding:12px 0}
+summary{cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"+";display:inline-block;width:20px;color:var(--brick);font-family:var(--mono)}
+details[open] summary:before{content:"–"}
+details p{margin:6px 0 0 20px;color:var(--ink2);font-size:15px}
+.rl{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px}
+@media(max-width:820px){.rl{grid-template-columns:1fr}}
+.tl{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px solid var(--ink);margin-top:18px}
+@media(max-width:820px){.tl{grid-template-columns:1fr 1fr}}
+.tl div{padding:12px 12px 0 0;font-size:14px;position:relative;color:var(--ink2)}
+.tl div:before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--sand);border:2px solid var(--ink)}
+.tl div.k:before{background:var(--brick);border-color:var(--brick)}
+.tl b{display:block;color:var(--ink);margin-top:4px}
+footer{max-width:1200px;margin:60px auto 0;padding:36px 24px 70px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1.3fr;gap:30px;font-size:14px;color:var(--ink2)}
+@media(max-width:820px){footer{grid-template-columns:1fr}}
+.refs p{padding-left:22px;text-indent:-22px;margin:0 0 6px}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@keyframes travel{to{offset-distance:100%}}
+@keyframes drift{50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav><div class="in" id="nav">
+<a href="#question">Research question</a><a href="#design">Design</a><a href="#analysis">Analysis</a><a href="#f1">Affiliation</a><a href="#f2">Audiences</a><a href="#f3">Aspiration</a><a href="#f4">Selection</a><a href="#contradictions">Contradictions</a><a href="#discussion">Discussion</a><a href="#reflexivity">Reflexivity</a>
+</div><div id="prog"></div></nav>
+
+<header class="hero">
+ <svg class="scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FC2D9"/><stop offset=".55" stop-color="#E9D7C0"/><stop offset="1" stop-color="#F3C9A0"/></linearGradient>
+   <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6C27A"/><stop offset=".6" stop-color="#C7694F"/><stop offset="1" stop-color="#5B3B5E"/></linearGradient>
+   <pattern id="win" width="26" height="30" patternUnits="userSpaceOnUse"><rect x="6" y="7" width="12" height="15" fill="#7E3420" opacity=".55"/></pattern>
+  </defs>
+  <rect width="1440" height="900" fill="url(#sky)"/>
+  <circle cx="1180" cy="250" r="70" fill="#F7E2B5" opacity=".9"/>
+  <rect y="520" width="1440" height="380" fill="#B76148" opacity=".5"/>
+  <rect x="560" y="360" width="560" height="260" fill="#A9472F"/><rect x="560" y="360" width="560" height="260" fill="url(#win)"/>
+  <rect x="520" y="340" width="640" height="26" fill="#8F3A26"/>
+  <rect x="1120" y="430" width="320" height="190" fill="#B95238"/><rect x="1120" y="430" width="320" height="190" fill="url(#win)"/>
+  <rect x="240" y="450" width="320" height="170" fill="#B95238"/><rect x="240" y="450" width="320" height="170" fill="url(#win)"/>
+  <rect x="780" y="250" width="120" height="110" fill="#9A3D28"/><rect x="800" y="270" width="80" height="80" fill="url(#win)"/>
+  <rect y="610" width="1440" height="290" fill="#D8C9A8"/>
+  <ellipse cx="720" cy="770" rx="840" ry="150" fill="#CDBD98"/>
+  <g fill="#5C4C3C" opacity=".75">
+   <g transform="translate(330 690)"><circle r="9" cy="-36"/><rect x="-8" y="-26" width="16" height="30" rx="7"/></g>
+   <g transform="translate(380 700)"><circle r="9" cy="-36"/><rect x="-8" y="-26" width="16" height="30" rx="7"/></g>
+   <g transform="translate(600 724)"><circle r="9" cy="-36"/><rect x="-8" y="-26" width="16" height="30" rx="7"/></g>
+   <g transform="translate(1290 700)"><circle r="9" cy="-36"/><rect x="-8" y="-26" width="16" height="30" rx="7"/></g>
+   <g transform="translate(1330 712)"><circle r="9" cy="-36"/><rect x="-8" y="-26" width="16" height="30" rx="7"/></g>
+  </g>
+  <g transform="translate(1000 420) rotate(-6)"><g style="animation:drift 6s ease-in-out infinite">
+   <rect width="230" height="440" rx="30" fill="#1E1D24"/>
+   <rect x="11" y="12" width="208" height="416" rx="22" fill="url(#scr)"/>
+   <rect x="30" y="40" width="90" height="20" rx="5" fill="rgba(0,0,0,.25)"/>
+   <rect x="30" y="80" width="150" height="14" rx="4" fill="#fff" opacity=".9"/>
+   <rect x="30" y="102" width="100" height="10" rx="4" fill="#fff" opacity=".7"/>
+   <path d="M70 330 v-60 a45 45 0 0 1 90 0 v60" fill="none" stroke="#fff" stroke-width="9" opacity=".85"/>
+   <circle cx="190" cy="230" r="13" fill="#fff" opacity=".35"/><circle cx="190" cy="270" r="13" fill="#fff" opacity=".35"/><circle cx="190" cy="310" r="13" fill="#fff" opacity=".35"/>
+   <rect x="30" y="370" width="140" height="10" rx="4" fill="#fff" opacity=".8"/><rect x="30" y="388" width="90" height="10" rx="4" fill="#FFE08A"/>
+  </g></g>
+ </svg>
+ <div class="txt"><div class="box">
+  <span class="lab">SPL 7750 Qualitative Research Methods · School of Public Policy, IIT Delhi · November 2026</span>
+  <h1 style="margin-top:10px">Student content creation at IIT Delhi: a qualitative case study</h1>
+  <div class="by">Avneel, Preeti and Vanshija</div>
+  <p class="abs">Seven IIT Delhi students who make videos for YouTube and Instagram told us how they decide what to film, what to leave out, and whom they make it for. This page follows the study from its first question to its findings.</p>
+  <div class="cue">Scroll to begin ↓</div>
+ </div></div>
+</header>
+
+<section class="chap" id="question">
+ <div class="chap-head"><span class="lab">Part 1</span><h2>Research question</h2><p>The question was revised three times, each version tested against Agee's (2009) four faults: a yes/no question, one too broad, one that leads, one that packs several questions together.</p></div>
+ <div class="story" data-ch="rq">
+  <div class="stage"><div class="frame"><div class="paper">
+   <span class="vlab">version 1</span><div class="ver" data-v="0">How do student vloggers construct and perform an “IIT Delhi student” identity for online audiences?</div>
+   <span class="vlab">version 2</span><div class="ver off" data-v="1">What role does the IIT Delhi name play in how student creators build and present their channels?</div>
+   <span class="vlab">version 3</span><div class="ver off" data-v="2">How do IIT Delhi student content creators produce and use representations of the Institution for online audiences?</div>
+   <span class="vlab">final</span><div class="ver off final" data-v="3">How do IIT Delhi student content creators develop and present their online content?</div>
+   <div class="sq ver off" data-v="3">1. What informs the selection of content creators choose to produce and share?</div>
+   <div class="sq ver off" data-v="3">2. How does affiliation with IIT Delhi feature in the creation and presentation of their content?</div>
+   <div class="sq ver off" data-v="3">3. How do creators understand and engage with their online audiences?</div>
+  </div></div></div>
+  <div class="steps">
+   <div class="step"><span class="lab">Version 1 · 6 November</span><h3>An identity we had assumed</h3><div><span class="pill p">not yes/no</span><span class="pill p">not too broad</span><span class="pill f">leading</span><span class="pill w">borderline packed</span></div><p style="margin-top:10px">The question took for granted that an “IIT Delhi identity” exists and is performed. The first transcripts did not show that. Creators used the name to reach people and spoke of moving away from it. Most also make Instagram reels, not vlogs.</p></div>
+   <div class="step"><span class="lab">Version 2</span><h3>Open, but narrow</h3><div><span class="pill p">not yes/no</span><span class="pill p">not too broad</span><span class="pill w">borderline leading</span><span class="pill p">not packed</span></div><p style="margin-top:10px">“What role” left room for the answer “very little”, which one participant gave. But much of the data on audiences, motives and omissions sat outside a question about the name alone.</p></div>
+   <div class="step"><span class="lab">Version 3</span><h3>The assumption returns</h3><div><span class="pill p">not yes/no</span><span class="pill p">not too broad</span><span class="pill f">leading</span><span class="pill p">not packed</span></div><p style="margin-top:10px">“Use representations of the Institution” presumed that creators represent IIT Delhi. Several described their channels as being about themselves.</p></div>
+   <div class="step"><span class="lab">Final</span><h3>Development and presentation</h3><div><span class="pill p">not yes/no</span><span class="pill p">not too broad</span><span class="pill p">not leading</span><span class="pill p">not packed</span></div><p style="margin-top:10px">Open, and answerable from what we collected. Affiliation moves into a sub-question, where it can be found to matter, or not. Six sub-questions were reduced to three where two overlapped.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="design">
+ <div class="chap-head"><span class="lab">Part 2</span><h2>Design</h2><p>An instrumental case study (Creswell &amp; Poth, 2018): one bounded case, studied for what it shows about content production, affiliation and audiences more widely.</p></div>
+ <div class="story" data-ch="design">
+  <div class="stage"><div class="frame" style="background:linear-gradient(#E9F0F4,#F3ECE0)">
+   <svg viewBox="0 0 600 600" aria-label="Seven creators, the case boundary, interviews and videos">
+    <ellipse cx="300" cy="380" rx="280" ry="150" fill="#D8C9A8"/>
+    <g id="dz-people"></g>
+    <g class="fade hide" data-s="1,2,3,4"><ellipse cx="300" cy="375" rx="235" ry="120" fill="none" stroke="#A9472F" stroke-width="2.5" stroke-dasharray="8 7"/>
+     <text x="300" y="525" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#8C877E">IIT Delhi · student creators · 2026</text></g>
+    <g class="fade hide" data-s="2" id="dz-talk"></g>
+    <g class="fade hide" data-s="3" id="dz-phones"></g>
+    <g class="fade hide" data-s="4"><rect x="150" y="96" width="300" height="70" rx="10" fill="#FFFDF9" stroke="#DCD2C1"/>
+     <text x="300" y="126" text-anchor="middle" font-family="IBM Plex Sans" font-size="15" font-weight="600" fill="#1E1D24">Consent · numbers, not names</text>
+     <text x="300" y="148" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#8C877E">no channel names · paraphrased videos</text></g>
+    <text x="300" y="66" text-anchor="middle" font-family="Source Serif 4" font-size="24" font-weight="600" fill="#1E1D24" id="dz-cap">Seven creators</text>
+   </svg>
+  </div></div>
+  <div class="steps">
+   <div class="step"><span class="lab">Sampling</span><h3>Seven creators</h3><p>Purposive sampling: current IIT Delhi students who make content related to the institute on YouTube or Instagram (Creswell &amp; Poth, 2018; Mills et al., 2010). They were found by keyword searches on both platforms and span B.Tech, M.Tech and PhD students. By the seventh interview, responses were largely recurring.</p></div>
+   <div class="step"><span class="lab">Approach</span><h3>A bounded case</h3><p>The case is bounded by one institution, one period and one practice. A narrative approach was the closest alternative, but our interest was a shared practice rather than individual life stories. Phenomenology, grounded theory and ethnography fit the question less well.</p></div>
+   <div class="step"><span class="lab">Interviews</span><h3>Conversations on the lawns</h3><p>Semi-structured, 35–45 minutes, in person, mostly on the Mechanical Lawns. The guide moved from open to specific and did not mention “IIT” until a late section, so participants described their work in their own terms first.</p></div>
+   <div class="step"><span class="lab">Public content</span><h3>Reading the videos alongside</h3><p>Each participant's public videos and reels were reviewed before and after the interview and read alongside the transcript. Several contradictions came to light this way.</p></div>
+   <div class="step"><span class="lab">Ethics</span><h3>Consent and anonymity</h3><p>Participants received an information sheet and signed a consent form with separate items for recording, quotation and use of their public videos. The invitation described the study plainly, without terms like “identity” that could shape answers. Because creators are publicly identifiable, they are referred to by number only and video content is paraphrased.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="analysis">
+ <div class="chap-head"><span class="lab">Part 3</span><h2>Analysis</h2><p>Transcripts were printed and colour-coded by hand, then moved to a shared sheet (Saldaña, 2016; Braun &amp; Clarke, 2006). One excerpt shows the process.</p></div>
+ <div class="story" data-ch="an">
+  <div class="stage"><div class="frame">
+   <div class="layer" id="an-paper">
+    <div class="paper">
+     <span class="vlab">P2 · B.Tech · interview transcript</span>
+     <div class="tx" id="an-tx">…I use IIT Delhi in my titles, thumbnails, videos, and hashtags simply because I am an IIT Delhi student. <span class="hl">I feel I have every right to use it.</span> That was the only reason behind my decision…</div>
+     <div id="an-margin" style="opacity:0;margin-top:14px;transition:opacity .5s;max-width:340px">
+      <div class="note"><span class="vlab">in vivo</span>“every right to use it”</div>
+      <div class="note"><span class="vlab">code</span>IIT Delhi tag as a matter of course or right</div>
+     </div>
+    </div>
+    <div class="bins" id="an-bins" style="opacity:0"></div>
+   </div>
+   <div class="layer" id="an-mx" style="opacity:0;pointer-events:none;overflow:auto">
+    <span class="vlab">coded excerpts per category, five interviews coded in full · select a cell</span>
+    <table class="mtx" id="mtx" style="margin-top:8px"></table><div id="mxn"></div>
+   </div>
+  </div></div>
+  <div class="steps">
+   <div class="step"><span class="lab">Step 1</span><h3>Excerpt</h3><p>Each passage that bore on the question was marked on the printed transcript.</p></div>
+   <div class="step"><span class="lab">Step 2</span><h3>In vivo and analytic codes</h3><p>The participant's own words were kept as an in vivo code, alongside our analytic code.</p></div>
+   <div class="step"><span class="lab">Step 3</span><h3>Category</h3><p>Codes were grouped into twelve categories; this one falls in C2. Group members coded separately and compared. Most categories overlapped; the distinct ones were discussed before they were kept.</p></div>
+   <div class="step"><span class="lab">Step 4</span><h3>Across participants</h3><p>The matrix shows where each category is concentrated. C3 (representing the institution) comes mostly from P1; C12 (visibility and judgement) mostly from P5. Select a cell for the category's definition.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="f1">
+ <div class="chap-head"><span class="lab">Finding 1 of 4</span><h2>Institutional affiliation</h2><p>All participants linked the IIT Delhi name to wider reach. They differed in how they used it, what it meant to them, and how long they meant to rely on it.</p></div>
+ <div class="story" data-ch="f1">
+  <div class="stage"><div class="frame" style="background:linear-gradient(#DCE8EF,#F3ECE0)">
+   <svg viewBox="0 0 600 600" aria-label="The institute's gate, view counts, and how participants describe the name">
+    <rect y="430" width="600" height="170" fill="#D8C9A8"/>
+    <rect x="140" y="190" width="40" height="240" fill="#A9472F"/><rect x="420" y="190" width="40" height="240" fill="#A9472F"/>
+    <rect x="120" y="160" width="360" height="50" fill="#8F3A26"/><text x="300" y="194" text-anchor="middle" font-family="IBM Plex Sans" font-weight="600" font-size="24" fill="#F7E2B5" letter-spacing="4">IIT DELHI</text>
+    <g class="fade" data-s="0,1">
+     <text x="60" y="482" font-family="IBM Plex Mono" font-size="12" fill="#5C574F">views, as one participant described them</text>
+     <rect x="60" y="494" width="480" height="16" rx="4" fill="#EFE6D6"/><rect x="60" y="494" width="10" height="16" rx="4" fill="#8C877E"/>
+     <text x="60" y="530" font-family="IBM Plex Sans" font-size="13" fill="#1E1D24">before IIT Delhi · about 200</text>
+     <rect x="60" y="544" width="480" height="16" rx="4" fill="#EFE6D6"/><rect x="60" y="544" width="480" height="16" rx="4" fill="#A9472F" id="f1-b2" style="transform-box:fill-box;transform-origin:left;transform:scaleX(0);transition:transform 1.4s"/>
+     <text x="60" y="580" font-family="IBM Plex Sans" font-size="13" fill="#1E1D24">as an IIT Delhi student · millions</text>
+    </g>
+    <g class="fade hide" data-s="2">
+     <g transform="translate(30 250)"><rect width="160" height="120" rx="12" fill="#FFFDF9" stroke="#DCD2C1"/><text x="14" y="24" font-family="IBM Plex Mono" font-size="12" fill="#8C877E">P1 · PhD · tag on</text><text x="14" y="54" font-family="Source Serif 4" font-size="16">“mention the</text><text x="14" y="74" font-family="Source Serif 4" font-size="16">institute… a much</text><text x="14" y="94" font-family="Source Serif 4" font-size="16">wider audience”</text></g>
+     <g transform="translate(410 250)"><rect width="160" height="120" rx="12" fill="#FFFDF9" stroke="#DCD2C1"/><text x="14" y="24" font-family="IBM Plex Mono" font-size="12" fill="#8C877E">P2 · B.Tech · tag off</text><text x="14" y="54" font-family="Source Serif 4" font-size="16">“a wider audience…</text><text x="14" y="74" font-family="Source Serif 4" font-size="16">I generally don't</text><text x="14" y="94" font-family="Source Serif 4" font-size="16">mention IIT Delhi”</text></g>
+    </g>
+    <g class="fade hide" data-s="3" font-family="IBM Plex Sans" font-size="15" text-anchor="middle">
+     <rect x="180" y="240" width="240" height="40" rx="20" fill="#FFFDF9" stroke="#A9472F"/><text x="300" y="266">a responsibility · P1</text>
+     <rect x="180" y="290" width="240" height="40" rx="20" fill="#FFFDF9" stroke="#A9472F"/><text x="300" y="316">a right · P2</text>
+     <rect x="180" y="340" width="240" height="40" rx="20" fill="#FFFDF9" stroke="#A9472F"/><text x="300" y="366">credibility · P3</text>
+    </g>
+    <g class="fade hide" data-s="4"><g id="walker" style="transition:transform 2s ease-out"><circle cx="300" cy="420" r="11" fill="#1E1D24"/><rect x="290" y="432" width="20" height="40" rx="9" fill="#1E1D24"/></g>
+     <path d="M300 480 C 380 500, 460 520, 570 560" stroke="#1E1D24" stroke-dasharray="4 6" fill="none" stroke-width="2"/>
+     <text x="560" y="590" text-anchor="end" font-family="IBM Plex Mono" font-size="12" fill="#5C574F">relying on it less over time</text></g>
+   </svg>
+  </div></div>
+  <div class="steps">
+   <div class="step"><h3>The name brings an audience</h3><p>One participant had posted videos before joining IIT Delhi; they rarely passed 200 views.</p><div class="q">“with IIT, this brand comes to your channel as well.”</div><span class="src">P3, M.Tech</span></div>
+   <div class="step"><h3>The scale of the difference</h3><p>After joining, his videos reached millions. His explanation: “99% wants to know what is it that that 1% is getting.” Another participant described IIT-tagged posts with a motivational line outperforming her most carefully made videos.</p></div>
+   <div class="step"><h3>The same name, opposite uses</h3><p>P1 adds IIT Delhi to reach more people. P2 leaves it out when he wants to reach beyond the campus. The name's value depends on which audience a creator is aiming at.</p></div>
+   <div class="step"><h3>What the name means to them</h3><p>For P1 it is a responsibility (“I feel responsible for how I represent the institute”). For P2 it is a right (“I have every right to use it”). For P3 it is credibility that separates enrolled students from outsiders who film at the gate.</p></div>
+   <div class="step"><h3>Relying on it less</h3><p>P1 is adding personal content so the channel outlasts her degree. P3 pointed to an alumnus who still returns to campus to film (“I don't want to be that person”) and plans eventually to make his channel private. P4 said her channel would be no different elsewhere, though she began IIT Delhi content because “many people aspire to study here.”</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="f2">
+ <div class="chap-head"><span class="lab">Finding 2 of 4</span><h2>Audiences</h2><p>Participants mostly imagined audiences outside the institute.</p></div>
+ <div class="story" data-ch="f2">
+  <div class="stage"><div class="frame" style="background:#F7F2E9">
+   <svg viewBox="0 0 600 600" aria-label="Rings of audiences around the creator">
+    <circle cx="300" cy="300" r="250" fill="none" stroke="#DCD2C1" stroke-dasharray="3 6"/>
+    <circle cx="300" cy="300" r="170" fill="none" stroke="#DCD2C1" stroke-dasharray="3 6"/>
+    <circle cx="300" cy="300" r="95" fill="#E7DAC3"/>
+    <text x="300" y="226" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#8C877E">campus</text>
+    <circle cx="300" cy="300" r="32" fill="#1E1D24"/><text x="300" y="305" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" fill="#fff">creator</text>
+    <g id="aud"></g>
+   </svg>
+  </div></div>
+  <div class="steps">
+   <div class="step" data-a="0"><h3>Aspirants</h3><p>The audience most participants named. P5 writes for “the middle bunch who need guidance” and answers their questions by email; one aspirant she helped now studies at an IIT.</p></div>
+   <div class="step" data-a="1"><h3>Parents</h3><p>P3's mother no longer asks whether he has eaten; she watches his videos. Other students' parents learn about campus events through him. P2 pictures “Indian parents” among his viewers.</p><div class="q">“she's like, ‘Yeah, he's okay.’”</div><span class="src">P3, M.Tech</span></div>
+   <div class="step" data-a="2"><h3>Alumni, and those who did not get in</h3><p>Graduates watch to revisit hostel life and placements; one video was shared in an alumni group. Students from other colleges and job seekers watch, in P3's words, to see “what we were missing”. (The word “longing” was the interviewer's first.)</p></div>
+   <div class="step" data-a="3"><h3>Campus peers and family</h3><p>Only P4 said most of her viewers are from IIT and her own age; she also reported the fewest expectations tied to IIT. Family is both audience and constraint: P1 posts carefully because relatives follow her account.</p></div>
+   <div class="step" data-a="-1"><h3>An imagined audience</h3><p>Marwick and boyd (2011) describe the imagined audience a creator writes for. Two participants said they make content for themselves, then explained in detail which videos attract views and why. Knowledge of viewers came from analytics, comments and messages.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="f3">
+ <div class="chap-head"><span class="lab">Finding 3 of 4</span><h2>Aspiration</h2><p>Most participants watched IIT content as aspirants. Now they make it for aspirants.</p></div>
+ <div class="story" data-ch="f3">
+  <div class="stage"><div class="frame" style="background:linear-gradient(#F7F2E9,#EFE3CE)">
+   <svg viewBox="0 0 600 600" aria-label="A cycle: watch, get in, notice a gap, create">
+    <circle cx="300" cy="300" r="180" fill="none" stroke="#DCD2C1" stroke-width="3"/>
+    <circle r="8" fill="#E3A23B" style="offset-path:path('M300 120 A180 180 0 1 1 299.9 120');animation:travel 8s linear infinite"/>
+    <g id="loopn"></g>
+    <g class="fade hide" data-s="4"><rect x="180" y="266" width="240" height="68" rx="10" fill="#1E1D24"/><text x="300" y="294" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" fill="#F7E2B5">what the cycle tends to leave out</text><text x="300" y="317" text-anchor="middle" font-family="Source Serif 4" font-size="17" fill="#fff">academic pressure</text></g>
+   </svg>
+  </div></div>
+  <div class="steps">
+   <div class="step"><h3>Watching</h3><p>P2 watched creators during JEE preparation. P5 found a single IIT Delhi video at the time. P1 watched vlogs that presented IIT as the reward after exams.</p><div class="q">“once I got into an IIT, I would be able to enjoy student life.”</div><span class="src">P1, PhD</span></div>
+   <div class="step"><h3>Getting in</h3><p>For some, after many attempts. P3 describes seven to eight years, including two drop years. His message to viewers: “don't ever stop trying.”</p></div>
+   <div class="step"><h3>Noticing a gap</h3><p>P3 could find no account of how placements work. P5 found nothing on women's hostel life: “every other person is making around the boys' hostel.”</p></div>
+   <div class="step"><h3>Creating</h3><p>They make what they had wanted to see: motivational edits for admission season, campus tours, preparation strategy, placement week. The next aspirants watch.</p></div>
+   <div class="step"><h3>What the cycle carries forward</h3><p>P1 says the vlogs she watched showed festivals and nightlife, and she “did not fully understand the academic pressure involved”. Her own channel features food, festivals and facilities. One participant's channel name rejects this picture: getting into IIT “certainly doesn't make it any easier.” P4, a PhD entrant who never watched IIT content, is the negative case.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="f4">
+ <div class="chap-head"><span class="lab">Finding 4 of 4</span><h2>Content selection</h2><p>The content participants said draws the most attention, criticism of the institute, is the content they most consistently withheld. Their reasons differed.</p></div>
+ <div class="story" data-ch="f4">
+  <div class="stage"><div class="frame" style="background:#F7F2E9">
+   <svg viewBox="0 0 600 600" aria-label="Topics posted and topics withheld, by reason">
+    <text x="30" y="40" font-family="IBM Plex Mono" font-size="12" fill="#5C574F">posted</text>
+    <rect y="330" width="600" height="270" fill="#EFE3CE"/>
+    <line x1="0" y1="330" x2="600" y2="330" stroke="#1E1D24" stroke-width="1.5"/>
+    <text x="30" y="358" font-family="IBM Plex Mono" font-size="12" fill="#5C574F">withheld or removed</text>
+    <g id="reasonlab"><text x="570" y="358" text-anchor="end" font-family="IBM Plex Sans" font-size="13" font-weight="600" fill="#A9472F" id="rlt"></text></g>
+    <g id="clips"></g>
+   </svg>
+  </div></div>
+  <div class="steps">
+   <div class="step" data-r="none"><h3>What performs</h3><p>Participants named what draws views: festivals, food, placements, technology, anything unique to IIT Delhi. And above all, negative content about the institute.</p><div class="q">“You say anything bad about the institute, people will come.”</div><span class="src">P3, M.Tech</span></div>
+   <div class="step" data-r="image"><h3>Institutional image</h3><p>P1 and P3 both know criticism would get views; both avoid it. P1 supported a student protest but did not want viewers to blame the whole institute.</p><div class="q">“I don't want to tarnish the image of the institute.”</div><span class="src">P3, M.Tech</span></div>
+   <div class="step" data-r="discipline"><h3>Discipline</h3><p>P2 deleted reels showing curfew-breaking, removed a hostel video on a senior's advice, and holds back rule-breaking he finds funny for fear of the Disciplinary Committee.</p></div>
+   <div class="step" data-r="outside"><h3>External constraints</h3><p>P3 removed a video on poverty in areas next to campus after an outside organisation threatened legal action, and does not film placement tests: “I think it's not right to post.”</p></div>
+   <div class="step" data-r="visibility"><h3>Personal visibility</h3><p>P5 keeps male friends and her own JEE story off camera, and avoids Instagram so campus peers will not see her as “a girl who just makes videos and does not study”. P4 avoids protest and conflict so she is not misjudged.</p></div>
+  </div>
+ </div>
+ <div class="block">
+  <h3>On screen and off screen</h3>
+  <p style="color:var(--ink2);max-width:700px;margin-top:6px">Goffman (1959) separates the front stage of performance from the back stage. Every participant described their content as an expression of themselves, and every one described something they adjust.</p>
+  <button class="chip" id="fbt" style="margin:6px 0 12px">Reveal participants' accounts</button>
+  <div id="fbl"></div>
+ </div>
+</section>
+
+<section class="chap" id="contradictions">
+ <div class="chap-head"><span class="lab">Part 5</span><h2>Contradictions</h2><p>Some accounts did not line up, within an interview or across two. We read these as the distance between how creators describe their work and how they describe doing it. Select a card for our reading.</p></div>
+ <div class="block" style="padding-top:0"><div class="chips" id="cf"></div><div class="cards" id="cg"></div></div>
+</section>
+
+<section class="chap" id="discussion">
+ <div class="chap-head"><span class="lab">Part 6</span><h2>Discussion</h2><p>Read together, the findings describe content shaped by the creator's relationships with the institution, the audience and the platform.</p></div>
+ <div class="story" data-ch="disc">
+  <div class="stage"><div class="frame" style="background:#FBF7F0">
+   <svg viewBox="0 0 600 600" aria-label="Model linking institution, creator, audience and platform">
+    <g id="edges" fill="none" stroke-linecap="round">
+     <path data-e="0" d="M300 152 L300 254"/><path data-e="1" d="M350 330 L445 428"/><path data-e="2" d="M250 330 L155 428"/><path data-e="3" d="M202 458 L398 458"/><path data-e="4" d="M520 428 Q585 210 387 118"/>
+    </g>
+    <g id="elabels" font-family="IBM Plex Sans" font-size="14">
+     <text data-e="0" x="312" y="208">affiliation · rules</text><text data-e="1" x="405" y="372">imagined audience</text><text data-e="2" x="58" y="372">reach · metrics</text><text data-e="3" x="300" y="520" text-anchor="middle">what performs shapes what is wanted</text><text data-e="4" x="478" y="220">image of IIT</text>
+    </g>
+    <g font-family="Source Serif 4" font-size="20" font-weight="600" text-anchor="middle">
+     <rect x="215" y="96" width="170" height="56" rx="10" fill="#A9472F"/><text x="300" y="131" fill="#fff">Institution</text>
+     <rect x="225" y="254" width="150" height="76" rx="38" fill="#1E1D24"/><text x="300" y="299" fill="#fff">Creator</text>
+     <rect x="400" y="430" width="150" height="56" rx="10" fill="#FFFDF9" stroke="#1E1D24" stroke-width="1.5"/><text x="475" y="465" fill="#1E1D24">Audience</text>
+     <rect x="50" y="430" width="150" height="56" rx="10" fill="#FFFDF9" stroke="#1E1D24" stroke-width="1.5"/><text x="125" y="465" fill="#1E1D24">Platform</text>
+    </g>
+   </svg>
+  </div></div>
+  <div class="steps">
+   <div class="step"><span class="lab">Institution and creator</span><p>The institution supplies the name that brings an audience, and the limits on what can be shown. Those limits worked mostly through anticipation, the Disciplinary Committee and seniors' advice, rather than written rules. Creators took the name on as a responsibility or a right, and most planned to depend on it less.</p></div>
+   <div class="step"><span class="lab">Creator and audience</span><p>Creators wrote for an imagined audience mostly outside the institute. Aspirants asked for guidance, and creators who had been aspirants supplied it, sometimes beyond the video, by email and message.</p></div>
+   <div class="step"><span class="lab">Creator and platform</span><p>Metrics taught creators what works. Two participants explained success as luck while describing detailed lessons drawn from their metrics.</p></div>
+   <div class="step"><span class="lab">Platform and audience</span><p>What performs shapes what viewers come to expect. Negative content performs especially well, which places creators between what the platform rewards and what the institution and their own visibility allow.</p></div>
+   <div class="step"><span class="lab">Audience and institution</span><p>Through these videos, aspirants and parents form a picture of IIT Delhi curated by omission. Their demand for that picture is what gives the name its value on the platform.</p></div>
+  </div>
+ </div>
+ <div class="block">
+  <div class="answer"><span class="lab">Answer to the research question</span>IIT Delhi student creators develop their content by drawing on the institute's name to reach audiences outside it, mainly aspirants and their families. They present it within limits set by the institution, by the costs of being visible, and by what they think viewers expect of an IIT student. What the platforms reward most, criticism of the institute, is what they most consistently hold back. Their attachment to the name is real but provisional.</div>
+  <h3 style="margin:34px 0 12px">Implications</h3>
+  <div class="g3">
+   <div class="tile"><b>Information for aspirants</b>Aspirants and parents learn about IIT life from student creators. Festivals, food, freedom and placements reach them; academic pressure, protests and rule-breaking mostly do not.</div>
+   <div class="tile"><b>Institutional guidance</b>No participant referred to a written policy on student content. Limits worked through anticipation. Clear guidance would reduce guesswork, including on filming other students without consent.</div>
+   <div class="tile"><b>Unequal costs of visibility</b>One woman participant described costs of being seen that no male participant mentioned. With one case this is a lead for further research, not a finding.</div>
+  </div>
+ </div>
+</section>
+
+<section class="chap" id="reflexivity">
+ <div class="block">
+  <div class="rl">
+   <div>
+    <span class="lab">Part 7</span><h2 style="margin:6px 0 14px">Reflexivity</h2>
+    <p style="color:var(--ink2)">As IIT Delhi students studying IIT Delhi students, we were insiders and researchers at once.</p>
+    <details open><summary>Our first question assumed its answer</summary><p>Version 1 took for granted an “IIT Delhi identity”. The early transcripts did not support it, and we revised the question and recorded why.</p></details>
+    <details><summary>Insider familiarity</summary><p>Shared campus knowledge made rapport easy, but we may not have asked about things that seemed too obvious to explain, such as hostel rules.</p></details>
+    <details><summary>Interviewer wording</summary><p>In one interview the interviewer suggested “a sense of longing” before the participant used it. Such passages are flagged and not treated as the participant's own framing.</p></details>
+    <details><summary>A paired interview</summary><p>Two participants are friends and collaborators, and one spoke during the other's interview. Their accounts are not fully independent.</p></details>
+    <details><summary>The setting</summary><p>Interviews took place in an open campus space with fellow students. Answers on protests, rules and criticism may have been more guarded than elsewhere.</p></details>
+    <details><summary>Transcription</summary><p>Transcripts were made with a transcription tool and cleaned. One line turned out to be the tool's note rather than the participant's words and was excluded. Quotations are checked against the recordings.</p></details>
+    <details><summary>Our lens</summary><p>Having begun with a question about performance, we may have read some accounts as adjustments where participants described themselves as natural. Each such reading was discussed before it was kept. Leaving some contradictions uninterpreted was also a decision.</p></details>
+   </div>
+   <div id="limitations">
+    <span class="lab">Part 8</span><h2 style="margin:6px 0 14px">Limitations</h2>
+    <ul style="padding-left:20px;color:var(--ink2);font-size:15px;margin:0">
+     <li>Seven purposively selected creators; those who agreed may be the more confident or successful.</li>
+     <li>No viewers were interviewed, so accounts of audiences could not be checked.</li>
+     <li>Interviews capture descriptions of practice, not observed filming or editing.</li>
+     <li>Deleted or unpublished content could not be examined.</li>
+     <li>Search found only creators who name IIT Delhi publicly.</li>
+     <li>A small, public group at one institute is hard to anonymise fully.</li>
+    </ul>
+   </div>
+  </div>
+  <h2 style="margin:56px 0 0" id="process">Process</h2>
+  <div class="tl">
+   <div><span class="lab">October</span><b>Topic</b>Several campus topics considered; student creators chosen.</div>
+   <div class="k"><span class="lab">6 Nov</span><b>Version 1</b>Question on identity; case study design.</div>
+   <div><span class="lab">10–12 Nov</span><b>Guide and outreach</b>Eight-section guide; neutral invitation.</div>
+   <div><span class="lab">Mid-Nov</span><b>Interviews</b>Seven in person, with consent forms.</div>
+   <div class="k"><span class="lab">19–23 Nov</span><b>Coding</b>Presupposition found; twelve categories; versions 2 and 3.</div>
+   <div class="k"><span class="lab">Final</span><b>Final question</b>Broadened; six sub-questions reduced to three.</div>
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div><b style="color:var(--ink)">Avneel, Preeti and Vanshija</b><p style="margin-top:8px">Group project for SPL 7750 Qualitative Research Methods, School of Public Policy, IIT Delhi. We thank the seven creators who gave their time. Participants are identified by number only; channel names and identifying details are omitted.</p></div>
+ <div class="refs">
+  <p>Agee, J. (2009). Developing qualitative research questions: A reflective process. <i>International Journal of Qualitative Studies in Education, 22</i>(4), 431–447.</p>
+  <p>Braun, V., &amp; Clarke, V. (2006). Using thematic analysis in psychology. <i>Qualitative Research in Psychology, 3</i>(2), 77–101.</p>
+  <p>Creswell, J. W., &amp; Poth, C. N. (2018). <i>Qualitative inquiry and research design</i> (4th ed.). SAGE.</p>
+  <p>Goffman, E. (1959). <i>The presentation of self in everyday life</i>. Doubleday.</p>
+  <p>Marwick, A. E., &amp; boyd, d. (2011). I tweet honestly, I tweet passionately. <i>New Media &amp; Society, 13</i>(1), 114–133.</p>
+  <p>Mills, A. J., Durepos, G., &amp; Wiebe, E. (Eds.). (2010). <i>Encyclopedia of case study research</i>. SAGE.</p>
+  <p>Saldaña, J. (2016). <i>The coding manual for qualitative researchers</i> (3rd ed.). SAGE.</p>
+ </div>
+</footer>
+
+<script>
+{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const NS="http://www.w3.org/2000/svg";
+const S=(tag,attrs,parent,text)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e};
+function showSet(root,i){root.querySelectorAll("[data-s]").forEach(g=>g.classList.toggle("hide",!g.dataset.s.split(",").map(Number).includes(i)))}
+
+/* design scene */
+const people=[[150,360],[215,322],[292,302],[372,316],[445,352],[250,425],[362,428]];
+const dz=$("#dz-people"),talk=$("#dz-talk"),ph=$("#dz-phones");
+people.forEach(([x,y],i)=>{const g=S("g",{transform:`translate(${x} ${y})`},dz);
+ S("circle",{r:11,cy:-34,fill:"#1E1D24"},g);S("rect",{x:-11,y:-22,width:22,height:34,rx:10,fill:i%2?"#A9472F":"#2D5D86"},g);
+ S("text",{x:0,y:30,"text-anchor":"middle","font-family":"IBM Plex Mono","font-size":11,fill:"#5C574F",class:"pid",style:"opacity:0;transition:opacity .5s"},g,"P"+(i+1));
+ const b=S("g",{transform:`translate(${x+12} ${y-72})`},talk);S("rect",{width:36,height:20,rx:8,fill:"#FFFDF9",stroke:"#8C877E"},b);[10,18,26].forEach(cx=>S("circle",{cx,cy:10,r:2,fill:"#5C574F"},b));
+ const p=S("g",{transform:`translate(${x-36} ${y-112})`},ph);S("rect",{width:24,height:40,rx:5,fill:"#1E1D24"},p);S("rect",{x:3,y:4,width:18,height:32,rx:3,fill:"#E3A23B"},p);S("line",{x1:12,y1:40,x2:34,y2:74,stroke:"#8C877E","stroke-dasharray":"2 4"},p)});
+const capTxt=["Seven creators","A bounded case","Interviews","Interviews and public videos","Consent and anonymity"];
+
+/* analysis */
+const CATS=[["C1","Chasing reach","#F2C98A","Views, virality, hooks, trends and posting frequency as influences on what is made."],["C2","IIT Delhi as a lever","#9FBFD8","The name used, emphasised or dropped: for reach, as a right, as credibility, as something to outgrow."],["C3","Representing the institution","#C9B2D6","Responsibility for the institute's image, tied to the effort of getting in."],["C4","Rules, risk and the unposted","#E8A797","Content deleted or never posted because of discipline, seniors' advice, protests or outside threats."],["C5","Who is watching","#F0D27C","Imagined and known audiences and how creators learn about them."],["C6","The self on screen","#A9D3CF","Toned down, made relatable, staged, or described as natural."],["C7","Borrowed templates","#D9C3A3","Creating from what was watched: aspirant viewing, copied formats, inherited images."],["C8","Informing vs relating","#B9C0E3","The criterion for what is worth posting: information, relatability, mood or craft."],["C9","People in the frame","#CFCFCF","Others in videos: asking, assuming consent, taking down."],["C10","What creating gives and takes","#E8B8CF","Time, attention, popularity and income."],["C11","Why they make content","#D7D0A8","A personal record, creative expression, helping aspirants, a future identity."],["C12","Visibility and judgement","#EFC2A3","Costs of being seen: concealment, family judgement, fear of being misread."]];
+const M=[[4,7,4,2,0],[7,6,6,3,4],[6,0,1,1,0],[3,5,2,1,0],[8,5,5,2,2],[5,7,3,2,0],[4,8,5,2,6],[5,4,3,3,3],[1,2,1,1,0],[7,3,0,2,1],[0,0,3,2,4],[0,0,0,2,6]];
+const PL=["P1 PhD","P2 B.Tech","P3 M.Tech","P4 PhD","P5 B.Tech"];
+$("#an-bins").innerHTML=CATS.map((c,i)=>`<div class="bin" style="background:${c[2]}" data-i="${i}"><b>${c[0]}</b><br>${c[1]}</div>`).join("");
+$("#mtx").innerHTML=`<tr><th></th>${PL.map(p=>`<th class="c">${p}</th>`).join("")}</tr>`+CATS.map((c,i)=>`<tr><th>${c[0]} ${c[1]}</th>${M[i].map((v,j)=>`<td><button data-i="${i}" data-j="${j}" aria-label="${c[1]}, ${PL[j]}: ${v}" style="background:rgba(169,71,47,${v?0.1+0.8*v/8:0.04});color:${v>4?'#fff':'#1E1D24'}">${v||""}</button></td>`).join("")}</tr>`).join("");
+$("#mtx").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const c=CATS[+b.dataset.i];$("#mxn").innerHTML=`<b>${c[0]} ${c[1]}.</b> ${c[3]} <span class="lab">${PL[+b.dataset.j]}: ${M[+b.dataset.i][+b.dataset.j]} excerpts</span>`});
+$("#mxn").textContent="Darker cells hold more coded excerpts.";
+
+/* audiences */
+const AUD=[["Aspirants",[[300,62],[385,82],[215,82],[458,132]]],["Parents",[[540,300],[522,382],[545,218]]],["Alumni · missed out",[[88,250],[70,332],[104,420],[162,500]]],["Peers · family",[[262,270],[340,332],[440,500],[300,548]]]];
+AUD.forEach((a,i)=>{const g=S("g",{"data-a":i,style:"transition:opacity .5s"},$("#aud"));a[1].forEach(([x,y])=>S("circle",{cx:x,cy:y,r:14,fill:"#2D5D86"},g));
+ const [lx,ly]=a[1][0];S("text",{x:lx,y:ly-22,"text-anchor":"middle","font-family":"IBM Plex Sans","font-size":14,"font-weight":600,fill:"#1E1D24"},g,a[0])});
+function audStep(k){$$("#aud > g").forEach(g=>{const on=k<0||+g.dataset.a===k;g.style.opacity=on?1:.15;g.querySelectorAll("circle").forEach(c=>c.setAttribute("fill",k>=0&&on?"#A9472F":"#2D5D86"))})}
+
+/* loop */
+[["Watch",300,120],["Get in",480,300],["Notice a gap",300,480],["Create",120,300]].forEach(p=>{const g=S("g",{},$("#loopn"));S("circle",{cx:p[1],cy:p[2],r:48,fill:"#FFFDF9",stroke:"#1E1D24","stroke-width":1.5,style:"transition:fill .4s"},g);S("text",{x:p[1],y:p[2]+6,"text-anchor":"middle","font-family":"Source Serif 4","font-size":16,"font-weight":600,fill:"#1E1D24"},g,p[0])});
+function loopStep(k){$$("#loopn > g circle").forEach((c,i)=>c.setAttribute("fill",i===k?"#E3A23B":"#FFFDF9"));showSet($("[data-ch=f3]"),k)}
+
+/* clips */
+const CL=[["Festival food","keep"],["Placements","keep"],["Campus tours","keep"],["Tech events","keep"],["Hostel life","keep"],["Motivation","keep"],["Protest","image"],["Criticism of IIT","image"],["Curfew-breaking","discipline"],["Hostel food video","discipline"],["Rule-breaking","discipline"],["Area near campus","outside"],["Placement tests","outside"],["Male friends","visibility"],["Own JEE story","visibility"],["Conflict","visibility"]];
+const RC={image:"#A9472F",discipline:"#2D5D86",outside:"#7A5C9E",visibility:"#C7694F",keep:"#E3A23B"};
+const RN={none:"",image:"institutional image",discipline:"discipline",outside:"external constraints",visibility:"personal visibility"};
+const clipEls=CL.map(c=>{const g=S("g",{style:"transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .5s"},$("#clips"));
+ S("rect",{width:126,height:36,rx:8,fill:"#FFFDF9",stroke:RC[c[1]],"stroke-width":2},g);S("rect",{width:8,height:36,rx:3,fill:RC[c[1]]},g);S("text",{x:16,y:23,"font-family":"IBM Plex Sans","font-size":12.5,fill:"#1E1D24"},g,c[0]);return g});
+const order=["image","discipline","outside","visibility"];
+function clipStep(r){const fallen=r==="none"?[]:order.slice(0,order.indexOf(r)+1);let top=0,bot=0;$("#rlt").textContent=RN[r];
+ CL.forEach((c,i)=>{const down=fallen.includes(c[1]);let x,y;if(down){x=22+(bot%4)*142;y=376+Math.floor(bot/4)*48;bot++}else{x=22+(top%4)*142;y=60+Math.floor(top/4)*48;top++}
+  clipEls[i].style.transform=`translate(${x}px,${y}px)`;clipEls[i].style.opacity=down&&c[1]!==r?.4:1})}
+
+/* front/back */
+const FB=[["P1 PhD","Calm, composed, informative.","“In real life, I am much more talkative and expressive.” Rates the match 6 out of 10."],["P2 B.Tech","A first-year who is behind on studies.","“…suggesting that I am not very good at studies, even though I may have already completed the syllabus.”"],["P3 M.Tech","Wakes at 4 a.m. during placement season.","“It was actually me sleeping at 4 a.m.”"],["P4 PhD","Spontaneous and unplanned.","“Before uploading a video, I have to think carefully about what I am sharing.”"],["P5 B.Tech","Cinematic, warm, relatable.","Most people on campus do not know she makes videos; being noticed “has had a negative impact on my life always.”"]];
+$("#fbl").innerHTML=`<div class="fbrow" style="border:0"><div class="lab">participant</div><div class="lab">front stage</div><div class="lab">back stage</div></div>`+FB.map(f=>`<div class="fbrow hidden"><div class="lab">${f[0]}</div><div>${f[1]}</div><div class="back">${f[2]}</div></div>`).join("");
+$("#fbt").onclick=function(){const h=!!document.querySelector(".fbrow.hidden");$$(".fbrow").forEach(r=>r.classList.toggle("hidden",!h));this.textContent=h?"Hide participants' accounts":"Reveal participants' accounts";this.classList.toggle("on",h)};
+
+/* contradictions */
+const CT=[["within","P2","Feels no pressure to keep an image; “do what you like.”","Deleted curfew reels, removed a video on a senior's advice, holds back for fear of the Disciplinary Committee.","Constraint experienced as free choice."],
+["within","P2","Views are luck; no strategy.","Uses IIT hashtags selectively and omits IIT Delhi to reach wider.","Strategy described in the language of chance."],
+["within","P1","Shows IIT Delhi beyond the usual highlights and festivals.","Festival food is what she posts most and what performs best.","Platform reward pulls content back to highlights."],
+["within","P1","“I want to show the reality.”","“…but I also need to be careful about how I present it.”","Honesty bounded by loyalty."],
+["within","P3","A personal diary, “not for them, but for me.”","Posted daily for a year; explains in detail what draws views.","Indifference to the audience and close knowledge of it coexist."],
+["within","P3","IIT Delhi is “a part of my character.”","Not the main subject of the channel; plans to make it private.","Embraced personally, limited as content."],
+["within","P5","Does not want to become popular.","Was not satisfied until 1,000 subscribers; knows her own story would grow the channel.","Reach wanted at a distance from campus."],
+["within","P4","Channel would be no different elsewhere.","Began IIT Delhi content because many aspire to study there.","Even the sceptic describes the institution shaping her choices."],
+["across","P1 · P2","Mentioning IIT Delhi widens reach.","Omitting it widens reach.","The name's effect depends on the audience targeted."],
+["across","P1 · P2","The name is a responsibility, earned.","The name is a right that comes with enrolment.","Duty or entitlement."],
+["across","P2 · P3","Presents himself as less studious than he is.","Presented a more disciplined routine than his own.","Adjustment runs both ways around an imagined IIT student."],
+["across","P1 · P2 · P4","All withheld protest content.","For image, for discipline, for fear of judgement.","The same omission, three causes."]];
+function drawC(g){$$("#cf .chip").forEach(c=>c.classList.toggle("on",c.dataset.g===g));$("#cg").innerHTML=CT.filter(c=>g==="all"||c[0]===g).map(c=>`<div class="ct" tabindex="0"><div class="a"><span class="k">${c[1]} · says</span>${c[2]}</div><div class="b"><span class="k">but also</span>${c[3]}</div><div class="m">${c[4]}</div></div>`).join("");
+ $$("#cg .ct").forEach(d=>{d.onclick=()=>d.classList.toggle("open");d.onkeydown=e=>{if(e.key==="Enter")d.classList.toggle("open")}})}
+[["all","All"],["within","Within an interview"],["across","Across interviews"]].forEach(([k,v])=>{const b=document.createElement("button");b.className="chip";b.dataset.g=k;b.textContent=v;b.onclick=()=>drawC(k);$("#cf").appendChild(b)});drawC("all");
+
+/* model */
+function discStep(k){$$("#edges path").forEach(p=>{const on=+p.dataset.e===k;p.setAttribute("stroke",on?"#A9472F":"#CFC5B4");p.setAttribute("stroke-width",on?5:3)});$$("#elabels text").forEach(t=>{const on=+t.dataset.e===k;t.setAttribute("fill",on?"#A9472F":"#8C877E");t.setAttribute("font-weight",on?600:400)})}
+
+/* step engine */
+const H={
+ rq:i=>$$("[data-ch=rq] .ver").forEach(v=>{const n=+v.dataset.v;v.classList.toggle("off",n>i);v.classList.toggle("old",n<i)}),
+ design:i=>{showSet($("[data-ch=design]"),i);$("#dz-cap").textContent=capTxt[i];$$("#dz-people .pid").forEach(t=>t.style.opacity=i===4?1:0)},
+ an:i=>{$("#an-tx").classList.toggle("go",i>=0);$("#an-margin").style.opacity=i>=1?1:0;$("#an-bins").style.opacity=i>=2?1:0;
+  $$("#an-bins .bin").forEach(b=>b.classList.toggle("hit",i>=2&&b.dataset.i==="1"));
+  $("#an-paper").style.opacity=i>=3?0:1;$("#an-mx").style.opacity=i>=3?1:0;$("#an-mx").style.pointerEvents=i>=3?"auto":"none"},
+ f1:i=>{showSet($("[data-ch=f1]"),i);$("#f1-b2").style.transform=`scaleX(${i>=1?1:0})`;$("#walker").style.transform=i===4?"translate(200px,70px)":"none"},
+ f2:(i,st)=>audStep(+st.dataset.a),
+ f3:i=>loopStep(i),
+ f4:(i,st)=>clipStep(st.dataset.r),
+ disc:i=>discStep(i)
+};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const st=e.target,story=st.closest(".story"),steps=[...story.querySelectorAll(".step")],i=steps.indexOf(st);
+ steps.forEach(s=>s.classList.toggle("on",s===st));H[story.dataset.ch](i,st)}),{rootMargin:"-45% 0px -45% 0px"});
+$$(".story").forEach(s=>{const first=s.querySelector(".step");first.classList.add("on");H[s.dataset.ch](0,first);s.querySelectorAll(".step").forEach(st=>io.observe(st))});
+
+/* nav */
+const links=$$("#nav a"),secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+function onS(){const mx=document.documentElement.scrollHeight-innerHeight;$("#prog").style.width=(mx>0?scrollY/mx*100:0)+"%";let cur=-1;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<120)cur=i});links.forEach((a,i)=>a.classList.toggle("cur",i===cur))}
+addEventListener("scroll",onS,{passive:true});onS();
+}
+</script>
+</body>
+</html>
